@@ -6,7 +6,9 @@ import (
 	"funcymonkey/src/evaluator"
 	"funcymonkey/src/lexer"
 	"funcymonkey/src/parser"
+	"funcymonkey/src/route"
 	"funcymonkey/src/token"
+	"os"
 )
 
 func main() {
@@ -16,4 +18,7 @@ func main() {
 	fmt.Printf("%s\n", lexer.Hello())
 	fmt.Printf("%s\n", parser.Hello())
 	fmt.Printf("%s\n", token.Hello())
+
+	args := os.Args
+	route.Main(args)
 }
