@@ -24,34 +24,44 @@ func New(input string) *Lexer {
 	return l
 }
 
-/*read next Character*/
-func (l *Lexer) readChar() {
-	if l.readPosition >= len(l.input) {
-		l.ch = 0
-	} else {
-		l.ch = l.input[l.readPosition]
-	}
-	l.position = l.readPosition
-	l.readPosition += 1
-}
-
 //Lexer implement
 
-func (l *Lexer) NewToken() token.Token {
+/*Read the next token and return*/
+func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
 	l.skipWhitespace()
 
 	switch l.ch {
 	case '{':
-		return newToken(token.LBRACE, l.ch)
+		tok = newToken(token.LBRACE, l.ch)
+	case '}':
+		tok = newToken(token.RBRACE, l.ch)
+	case '(':
+		tok = newToken(token.LPAREN, l.ch)
+	case ')':
+		tok = newToken(token.RPAREN, l.ch)
+	case 0:
+		tok.Type = token.EOF
+		tok.Literal = ""
+	default:
+		if isLetter(l.ch) {
+			tok.Literal = l.readIdentifier()
+			tok.Type = token.ThatisIdent(tok.Literal)
+			return tok
+		} else if isDigit(l.ch) {
+			tok.Type, tok.Literal = l.readNumber()
+			return tok
+		} else {
+			tok = newToken(token.ILLEGAL, l.ch)
+		}
 	}
 
+	l.readChar()
 	return tok
 }
 
 /*return newToken*/
 func newToken(tokenType token.TokenType, ch byte) token.Token {
-	var tok token.Token
-	return tok
+	return token.Token{Type: tokenType, Literal: string(ch)}
 }

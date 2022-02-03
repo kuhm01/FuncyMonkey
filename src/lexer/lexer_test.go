@@ -8,6 +8,7 @@ import (
 func TestNextToken(t *testing.T) {
 	input := `
 	func Main() {}
+	func determine() {}
 	`
 
 	tests := []struct {
@@ -16,6 +17,12 @@ func TestNextToken(t *testing.T) {
 	}{
 		{token.BFUNCTION, "func"},
 		{token.MAINF, "Main"},
+		{token.LPAREN, "("},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.RBRACE, "}"},
+		{token.BFUNCTION, "func"},
+		{token.IDENT, "determine"},
 		{token.LPAREN, "("},
 		{token.RPAREN, ")"},
 		{token.LBRACE, "{"},

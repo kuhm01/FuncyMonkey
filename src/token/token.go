@@ -7,7 +7,7 @@ func Hello() string {
 type TokenType string
 
 type Token struct {
-	Token   TokenType
+	Type    TokenType
 	Literal string
 }
 
@@ -32,9 +32,14 @@ const (
 	IDENT = "IDENT"
 	MAINF = "MAINF"
 
+	INT   = "INT"
+	FLOAT = "FLOAT"
+
 	LBRACE = "{"
 	RBRACE = "}"
 	LPAREN = "("
 	RPAREN = ")"
-	EOF    = ""
+
+	EOF     = ""
+	ILLEGAL = "ILLEGAL"
 )
