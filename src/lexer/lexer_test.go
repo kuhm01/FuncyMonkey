@@ -8,7 +8,8 @@ import (
 func TestNextToken(t *testing.T) {
 	input := `
 	func Main() {}
-	func determine() {}
+	func determine(a, b) {}
+	for a := range(5) {}
 	`
 
 	tests := []struct {
@@ -24,6 +25,18 @@ func TestNextToken(t *testing.T) {
 		{token.BFUNCTION, "func"},
 		{token.IDENT, "determine"},
 		{token.LPAREN, "("},
+		{token.IDENT, "a"},
+		{token.COMMA, ","},
+		{token.IDENT, "b"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.RBRACE, "}"},
+		{token.FOR, "for"},
+		{token.IDENT, "a"},
+		{token.GOASSIGN, ":="},
+		{token.IDENT, "range"},
+		{token.LPAREN, "("},
+		{token.INT, "5"},
 		{token.RPAREN, ")"},
 		{token.LBRACE, "{"},
 		{token.RBRACE, "}"},

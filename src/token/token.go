@@ -12,12 +12,20 @@ type Token struct {
 }
 
 var keywords = map[string]TokenType{
-	"fn":   SFUNCTION,
-	"func": BFUNCTION,
-	"Main": MAINF,
+	"fn":     SFUNCTION,
+	"func":   BFUNCTION,
+	"Main":   MAINF,
+	"if":     IF,
+	"else":   ELSE,
+	"for":    FOR,
+	"var":    VAR,
+	"return": RETURN,
+	"true":   TRUE,
+	"false":  FALSE,
+	"const":  CONST,
 }
 
-func ThatisIdent(ident string) TokenType {
+func IsThatIdent(ident string) TokenType {
 	if tok, ok := keywords[ident]; ok {
 		return tok
 	}
@@ -32,13 +40,45 @@ const (
 	IDENT = "IDENT"
 	MAINF = "MAINF"
 
-	INT   = "INT"
-	FLOAT = "FLOAT"
+	IF     = "IF"
+	ELSE   = "ELSE"
+	RETURN = "RETURN"
+	FOR    = "FOR"
+	VAR    = "VAR"
+	CONST  = "CONST"
 
-	LBRACE = "{"
-	RBRACE = "}"
-	LPAREN = "("
-	RPAREN = ")"
+	INT    = "INT"
+	FLOAT  = "FLOAT"
+	STRING = "STRING"
+
+	TRUE  = "TRUE"
+	FALSE = "FALSE"
+
+	ASSIGN   = "="
+	GOASSIGN = ":="
+
+	EQ     = "=="
+	NOT_EQ = "!="
+
+	BANG     = "!"
+	PLUS     = "+"
+	MINUS    = "-"
+	ASTERISK = "*"
+	SLASH    = "/"
+	LT       = "<"
+	GT       = ">"
+	DOT      = "."
+
+	LBRACKET = "["
+	RBRACKET = "]"
+	LBRACE   = "{"
+	RBRACE   = "}"
+	LPAREN   = "("
+	RPAREN   = ")"
+
+	COLON     = ":"
+	SEMICOLON = ";"
+	COMMA     = ","
 
 	EOF     = ""
 	ILLEGAL = "ILLEGAL"

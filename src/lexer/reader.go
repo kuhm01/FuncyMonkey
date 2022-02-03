@@ -4,7 +4,7 @@ import (
 	"funcymonkey/src/token"
 )
 
-/*peek the Character*/
+/*that see the Character*/
 func (l *Lexer) peekChar() byte {
 	if l.readPosition >= len(l.input) {
 		return 0
@@ -13,7 +13,7 @@ func (l *Lexer) peekChar() byte {
 	}
 }
 
-/*read next Character*/
+/*Read current Character*/
 func (l *Lexer) readChar() {
 	if l.readPosition >= len(l.input) {
 		l.ch = 0
@@ -59,4 +59,33 @@ func (l *Lexer) readNumber() (token.TokenType, string) {
 	} else {
 		return token.FLOAT, l.input[position:l.position]
 	}
+}
+
+/*Read the Comments*/
+func (l *Lexer) readComments() token.Token {
+	l.readChar()
+	for {
+		l.readChar()
+		if l.ch == '#' {
+			if l.peekChar() == '/' {
+				l.readChar()
+				break
+			}
+		}
+	}
+	l.readChar()
+	return l.NextToken()
+}
+
+/*Read the String*/
+func (l *Lexer) readString() string {
+	position := l.position + 1
+	for {
+		l.readChar()
+		if l.ch == '"' || l.ch == 0 {
+			break
+		}
+	}
+
+	return l.input[position:l.position]
 }
