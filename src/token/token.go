@@ -26,6 +26,7 @@ var keywords = map[string]TokenType{
 	"const":  CONST,
 }
 
+/*Check keword by argument string*/
 func IsThatIdent(ident string) TokenType {
 	if tok, ok := keywords[ident]; ok {
 		return tok
