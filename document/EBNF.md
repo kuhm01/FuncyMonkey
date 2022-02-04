@@ -8,7 +8,8 @@
 <statement> ::== 
     if <expression> '{' <statement> '}' [else '{' <statement> '}'] |
     for <identifier> := <expression> '{' <statement> '}' |
-    <big statement> | var <identifier> <otype>; | const <identifier> = <value>;
+    <big statement> | var <identifier> <otype>; | const <identifier> = <value>; |
+    return <expression>;
 
 
 <expression> ::== 
